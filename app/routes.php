@@ -4,6 +4,11 @@ declare(strict_types=1);
 use App\Application\Actions\User\ListUsersAction;
 use App\Application\Actions\User\ViewUserAction;
 use App\Application\Actions\User\UpdateUserAction;
+use App\Application\Actions\Jobdating\ListJobdatingsAction;
+use App\Application\Actions\Jobdating\ViewJobdatingAction;
+use App\Application\Actions\Jobdating\UpdateJobdatingAction;
+use App\Application\Actions\Jobdating\DeleteJobdatingAction;
+use App\Application\Actions\Jobdating\CreateJobdatingAction;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Slim\App;
@@ -15,12 +20,12 @@ return function (App $app) {
         return $response;
     });
 
-    $app->group('/jobdatings', function (Group $group) {
-        $group->get('', function(){});
-        $group->post('', function(){});
-        $group->get('/{id}', function(){});
-        $group->put('/{id}', function(){});
-        $group->delete('/{id}', function(){});
+    $app->group('/Jobdatings', function (Group $group) {
+        $group->get('', ListJobdatingsAction::class);
+        $group->post('', CreateJobdatingAction::class);
+        $group->get('/{id}', ViewJobdatingAction::class);
+        $group->put('/{id}', UpdateJobdatingAction::class);
+        $group->delete('/{id}', DeleteJobdatingAction::class);
 
         $group->post('/{id}/{listName}', function(){});
         // $group->post('/{id}/students', function(){});
